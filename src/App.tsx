@@ -1,15 +1,30 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Divider, Layout, PageHeader } from "antd";
 import "./App.css";
+
+const { Header, Footer, Content } = Layout;
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<h1>Bowling Scoring!</h1>} />
-        </Routes>
-      </BrowserRouter>
+      <Layout>
+        <Header>
+          <PageHeader title="Bowling Scoring" className="site-page-header" />
+          <Divider plain />
+        </Header>
+        <Content>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<p>Content</p>} />
+            </Routes>
+          </BrowserRouter>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          <Divider plain />
+          Made by Omar Dulaimi
+        </Footer>
+      </Layout>
     </div>
   );
 }

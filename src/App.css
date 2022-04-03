@@ -1,1 +1,28 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
+
+.ant-layout-footer {
+  color: #fff;
+  background: #7dbcea;
+}
+
+.ant-layout-header,
+.ant-layout-footer {
+  color: rgb(0, 0, 0);
+  background: #ffffff;
+  height: auto;
+}
+[data-theme="dark"] .ant-layout-header,
+[data-theme="dark"] .ant-layout-footer {
+  background: #ffffff;
+}
+
+.ant-layout-footer {
+  line-height: 1.5;
+}
+
+.ant-layout-content {
+  min-height: 120px;
+  line-height: 120px;
+  background: #ffffff;
+}
+
