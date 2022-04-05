@@ -26,7 +26,7 @@ import ResultsModal from "./ResultsModal/Results-modal";
 const { Panel } = Collapse;
 
 interface GameProps {
-  loadedGameData: GameDataType;
+  loadedGameData?: GameDataType;
 }
 
 const Game: FC<GameProps> = (props) => {

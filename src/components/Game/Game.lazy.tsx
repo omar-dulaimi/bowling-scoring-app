@@ -5,7 +5,7 @@ const LazyGame = lazy(() => import("./Game"));
 
 const Game = (
   props: JSX.IntrinsicAttributes & { children?: React.ReactNode } & {
-    loadedGameData:GameDataType;
+    loadedGameData?: GameDataType;
   }
 ) => (
   <Suspense fallback={null}>
