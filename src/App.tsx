@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Divider, Layout, PageHeader } from "antd";
 import "./App.css";
 import Game from "./components/Game/Game.lazy";
+import Home from "./components/Home/Home.lazy";
 
 const { Header, Footer, Content } = Layout;
 
@@ -17,10 +18,7 @@ function App() {
         <Content>
           <BrowserRouter>
             <Routes>
-              <Route
-                path="/"
-                element={<div>Welcome to Bowling Scoring App!</div>}
-              />
+              <Route path="/" element={<Home />} />
               <Route path="/game" element={<Game />} />
             </Routes>
           </BrowserRouter>
