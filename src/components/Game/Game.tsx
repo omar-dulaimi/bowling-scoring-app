@@ -217,7 +217,7 @@ const Game: FC<GameProps> = (props) => {
                 >
                   <Card
                     style={{
-                      width: "90%",
+                      width: "300px",
                       marginTop: 12,
                       textAlign: "center",
                       ...(index === currentFrameIndex && {
