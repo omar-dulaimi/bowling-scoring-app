@@ -121,7 +121,12 @@ export const getNumbersRange = (frame: FrameType, forThrow: ThrowType) => {
 
   if (forThrow === "3rd") {
     if (frame.canHaveThirdThrow) {
-      if (frame.secondThrowScore === 10) {
+      if (
+        frame.secondThrowScore === 10 ||
+        (frame.firstThrowScore !== null &&
+          frame.secondThrowScore !== null &&
+          Number(frame.firstThrowScore) + Number(frame.secondThrowScore) === 10)
+      ) {
         return [0, 10];
       } else {
         return [0, 10 - Number(frame.secondThrowScore)];
