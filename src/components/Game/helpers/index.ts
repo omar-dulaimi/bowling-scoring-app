@@ -130,3 +130,81 @@ export const getNumbersRange = (frame: FrameType, forThrow: ThrowType) => {
   }
   return [0, 10];
 };
+
+
+export const getRenderChecksForBadge = (
+  frame: FrameType,
+  forThrow: ThrowType,
+  checkType: "text" | "color" | "display"
+) => {
+  if (forThrow === "1st") {
+    if (checkType === "text") return "Strike";
+    if (checkType === "color") return "red";
+    if (checkType === "display")
+      return frame?.firstThrowScore === 10 ? "unset" : "none";
+  }
+
+  if (forThrow === "2nd") {
+    if (checkType === "text") {
+      return frame?.secondThrowScore === 10
+        ? "Strike"
+        : Number(frame?.firstThrowScore) + Number(frame?.secondThrowScore) ===
+            10 &&
+          Number(frame?.firstThrowScore) !== 0 &&
+          Number(frame?.secondThrowScore) !== 0
+        ? "Spare"
+        : "";
+    }
+    if (checkType === "color") {
+      return frame?.secondThrowScore === 10
+        ? "red"
+        : Number(frame?.firstThrowScore) + Number(frame?.secondThrowScore) ===
+            10 &&
+          Number(frame?.firstThrowScore) !== 0 &&
+          Number(frame?.secondThrowScore) !== 0
+        ? "blue"
+        : "";
+    }
+    if (checkType === "display") {
+      return frame?.secondThrowScore === 10 ||
+        (Number(frame?.firstThrowScore) + Number(frame?.secondThrowScore) ===
+          10 &&
+          Number(frame?.firstThrowScore) !== 0 &&
+          Number(frame.secondThrowScore) !== 0)
+        ? "unset"
+        : "none";
+    }
+  }
+
+  if (forThrow === "3rd") {
+    if (checkType === "text") {
+      return frame?.thirdThrowSCore === 10
+        ? "Strike"
+        : Number(frame?.secondThrowScore) + Number(frame?.thirdThrowSCore) ===
+            10 &&
+          Number(frame?.secondThrowScore) !== 0 &&
+          Number(frame?.thirdThrowSCore) !== 0
+        ? "Spare"
+        : "";
+    }
+    if (checkType === "color") {
+      return frame?.thirdThrowSCore === 10
+        ? "red"
+        : Number(frame?.secondThrowScore) + Number(frame?.thirdThrowSCore) ===
+            10 &&
+          Number(frame?.secondThrowScore) !== 0 &&
+          Number(frame?.thirdThrowSCore) !== 0
+        ? "blue"
+        : "";
+    }
+    if (checkType === "display") {
+      return frame?.thirdThrowSCore === 10 ||
+        (Number(frame?.secondThrowScore) + Number(frame?.thirdThrowSCore) ===
+          10 &&
+          Number(frame?.secondThrowScore) !== 0 &&
+          Number(frame?.thirdThrowSCore) !== 0)
+        ? "unset"
+        : "none";
+    }
+  }
+};

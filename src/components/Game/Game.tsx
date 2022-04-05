@@ -18,6 +18,7 @@ import {
   calculateFrameScore,
   getCardPointerEventsValue,
   getNumbersRange,
+  getRenderChecksForBadge,
 } from "./helpers";
 import ResultsModal from "./ResultsModal/Results-modal";
 
@@ -188,91 +189,105 @@ const Game: FC<GameProps> = (props) => {
         {gameData?.frames?.map((frame, index) => (
           <Col key={index} xs={24} sm={12} md={10} lg={8} xl={6}>
             <Badge.Ribbon
-              text="Strike"
-              color="red"
+              text={getRenderChecksForBadge(frame, "1st", "text")}
+              color={getRenderChecksForBadge(frame, "1st", "color")}
               placement="start"
-              style={{ display: frame.isStrike ? "unset" : "none" }}
+              style={{
+                display: getRenderChecksForBadge(frame, "1st", "display"),
+              }}
             >
               <Badge.Ribbon
-                text="Spare"
-                color="blue"
+                text={getRenderChecksForBadge(frame, "2nd", "text")}
+                color={getRenderChecksForBadge(frame, "2nd", "color")}
                 placement="start"
                 style={{
                   top: "36px",
-                  display: frame.isSpare ? "unset" : "none",
+                  display: getRenderChecksForBadge(frame, "2nd", "display"),
                 }}
               >
-                <Card
+                <Badge.Ribbon
+                  text={getRenderChecksForBadge(frame, "3rd", "text")}
+                  color={getRenderChecksForBadge(frame, "3rd", "color")}
+                  placement="start"
                   style={{
-                    width: "90%",
-                    marginTop: 12,
-                    textAlign: "center",
-                    ...(index === currentFrameIndex && {
-                      borderColor: "darkblue",
-                    }),
-                    pointerEvents: getCardPointerEventsValue(
-                      frame,
-                      index,
-                      currentFrameIndex
-                    ),
+                    top: "64px",
+                    display: getRenderChecksForBadge(frame, "3rd", "display"),
                   }}
-                  hoverable
-                  title={frame.name}
                 >
-                  <Collapse bordered={false}>
-                    <Panel
-                      header={`First throw => ${Number(frame.firstThrowScore)}`}
-                      key="1"
-                    >
-                      <Form
-                        layout={"inline"}
-                        initialValues={{ layout: "vertical" }}
-                      >
-                        <Col xs={24} style={{ width: "100%" }}>
-                          {getFrameThrowButtons(frame, index, "1st")}
-                        </Col>
-                      </Form>
-                    </Panel>
-                    <Panel
-                      header={`Second throw => ${Number(
-                        frame.secondThrowScore
-                      )}`}
-                      key="2"
-                    >
-                      <Form
-                        layout={"inline"}
-                        initialValues={{ layout: "inline" }}
-                      >
-                        <Col xs={24} style={{ width: "100%" }}>
-                          {getFrameThrowButtons(frame, index, "2nd")}
-                        </Col>
-                      </Form>
-                    </Panel>
-                    {frame.canHaveThirdThrow && (
+                  <Card
+                    style={{
+                      width: "90%",
+                      marginTop: 12,
+                      textAlign: "center",
+                      ...(index === currentFrameIndex && {
+                        borderColor: "darkblue",
+                      }),
+                      pointerEvents: getCardPointerEventsValue(
+                        frame,
+                        index,
+                        currentFrameIndex
+                      ),
+                    }}
+                    hoverable
+                    title={frame.name}
+                  >
+                    <Collapse bordered={false}>
                       <Panel
-                        header={`Third throw => ${Number(
-                          frame.thirdThrowSCore
+                        header={`First throw => ${Number(
+                          frame.firstThrowScore
                         )}`}
-                        key="3"
+                        key="1"
+                      >
+                        <Form
+                          layout={"inline"}
+                          initialValues={{ layout: "vertical" }}
+                        >
+                          <Col xs={24} style={{ width: "100%" }}>
+                            {getFrameThrowButtons(frame, index, "1st")}
+                          </Col>
+                        </Form>
+                      </Panel>
+                      <Panel
+                        header={`Second throw => ${Number(
+                          frame.secondThrowScore
+                        )}`}
+                        key="2"
                       >
                         <Form
                           layout={"inline"}
                           initialValues={{ layout: "inline" }}
                         >
                           <Col xs={24} style={{ width: "100%" }}>
-                            {getFrameThrowButtons(frame, index, "3rd")}
+                            {getFrameThrowButtons(frame, index, "2nd")}
                           </Col>
                         </Form>
                       </Panel>
-                    )}
-                  </Collapse>
+                      {frame.canHaveThirdThrow && (
+                        <Panel
+                          header={`Third throw => ${Number(
+                            frame.thirdThrowSCore
+                          )}`}
+                          key="3"
+                        >
+                          <Form
+                            layout={"inline"}
+                            initialValues={{ layout: "inline" }}
+                          >
+                            <Col xs={24} style={{ width: "100%" }}>
+                              {getFrameThrowButtons(frame, index, "3rd")}
+                            </Col>
+                          </Form>
+                        </Panel>
+                      )}
+                    </Collapse>
 
-                  <Divider orientation="left" plain>
-                    Score
-                  </Divider>
+                    <Divider orientation="left" plain>
+                      Score
+                    </Divider>
 
-                  <Statistic title="" value={Number(frame.frameScore)} />
-                </Card>
+                    <Statistic title="" value={Number(frame.frameScore)} />
+                  </Card>
+                </Badge.Ribbon>
               </Badge.Ribbon>
             </Badge.Ribbon>
           </Col>
