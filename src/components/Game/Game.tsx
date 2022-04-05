@@ -16,6 +16,7 @@ import { INITIAL_GAME_DATA } from "../../constants/initial-game-state";
 import "./Game.css";
 import {
   calculateFrameScore,
+  checkIfGameIsComplete,
   getCardPointerEventsValue,
   getNumbersRange,
   getRenderChecksForBadge,
@@ -68,7 +69,7 @@ const Game: FC<GameProps> = (props) => {
       break;
     }
     setCurrentFrameIndex(newFrameIndex);
-    if (newFrameIndex === -1) {
+    if (checkIfGameIsComplete(newFrameIndex, gameData)) {
       setShowResults(true);
     }
   }, [gameData]);

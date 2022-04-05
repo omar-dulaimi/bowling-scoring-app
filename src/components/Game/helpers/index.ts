@@ -131,7 +131,6 @@ export const getNumbersRange = (frame: FrameType, forThrow: ThrowType) => {
   return [0, 10];
 };
 
-
 export const getRenderChecksForBadge = (
   frame: FrameType,
   forThrow: ThrowType,
@@ -207,4 +206,38 @@ export const getRenderChecksForBadge = (
         : "none";
     }
   }
+};
+
+export const checkIfGameIsComplete = (
+  newFrameIndex: number,
+  gameData: GameDataType
+) => {
+  if (newFrameIndex === -1) {
+    const currentFrame = gameData.frames[9];
+    if (currentFrame?.canHaveThirdThrow) {
+      if (
+        !currentFrame?.isStrike &&
+        !currentFrame?.isSpare &&
+        currentFrame?.firstThrowScore !== null &&
+        currentFrame?.secondThrowScore !== null &&
+        Number(currentFrame?.firstThrowScore) >= 0 &&
+        Number(currentFrame?.secondThrowScore) >= 0
+      ) {
+        return true;
+      }
+
+      if (
+        (currentFrame?.isStrike || currentFrame?.isSpare) &&
+        currentFrame?.firstThrowScore !== null &&
+        currentFrame?.secondThrowScore !== null &&
+        currentFrame?.thirdThrowSCore !== null &&
+        Number(currentFrame?.firstThrowScore) >= 0 &&
+        Number(currentFrame?.secondThrowScore) >= 0 &&
+        Number(currentFrame?.thirdThrowSCore) >= 0
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
