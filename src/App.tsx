@@ -17,7 +17,11 @@ function App() {
         <Content>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Game />} />
+              <Route
+                path="/"
+                element={<div>Welcome to Bowling Scoring App!</div>}
+              />
+              <Route path="/game" element={<Game />} />
             </Routes>
           </BrowserRouter>
         </Content>
