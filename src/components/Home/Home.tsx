@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Space, Upload } from "antd";
+import { Card, Space, Upload, message } from "antd";
 import "./Home.css";
 import { GameDataType } from "../../types";
 
@@ -38,8 +38,16 @@ const Home: FC<HomeProps> = (props) => {
             beforeUpload={(file) => {
               const reader = new FileReader();
               reader.onload = (e) => {
-                setLoadedGameData(JSON.parse(e?.target?.result as string));
-                navigate("/game");
+                try {
+                  const parsedGamed = JSON.parse(e?.target?.result as string);
+                  setLoadedGameData(parsedGamed);
+                  navigate("/game");
+                } catch (error) {
+                  message.error(
+                    `Error reading save file: ${(error as any)?.message}`,
+                    5
+                  );
+                }
               };
               reader.readAsText(file);
               return false;
