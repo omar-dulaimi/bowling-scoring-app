@@ -19,6 +19,7 @@ import {
   getCardPointerEventsValue,
   getNumbersRange,
 } from "./helpers";
+import ResultsModal from "./ResultsModal/Results-modal";
 
 const { Panel } = Collapse;
 
@@ -29,15 +30,20 @@ const Game: FC<GameProps> = () => {
   const [gameData, setGameData] = useState<GameDataType>({
     ...INITIAL_GAME_DATA,
   });
+  const [showResults, setShowResults] = useState(true);
 
   useEffect(() => {
+    let totalGameScore = 0;
     const framesToScore = gameData.frames.map((frame, index) => {
+      const frameScore = calculateFrameScore(frame, index, gameData);
+      totalGameScore += frameScore;
       return {
         ...frame,
-        frameScore: calculateFrameScore(frame, index, gameData),
+        frameScore,
       };
     });
     gameData.frames = framesToScore;
+    gameData.totalGameScore = totalGameScore;
     setGameData(gameData);
   }, [gameData, currentFrameIndex]);
 
@@ -58,6 +64,9 @@ const Game: FC<GameProps> = () => {
       break;
     }
     setCurrentFrameIndex(newFrameIndex);
+    if (newFrameIndex === -1) {
+      setShowResults(true);
+    }
   }, [gameData]);
 
   const getFrameThrowButtons = (
@@ -266,6 +275,11 @@ const Game: FC<GameProps> = () => {
           </Col>
         ))}
       </Row>
+      <ResultsModal
+        showResults={showResults}
+        setShowResults={setShowResults}
+        gameData={gameData}
+      />
     </div>
   );
 };
