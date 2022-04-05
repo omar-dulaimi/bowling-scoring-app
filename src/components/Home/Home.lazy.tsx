@@ -1,8 +1,13 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Dispatch, lazy, SetStateAction, Suspense } from "react";
+import { GameDataType } from "../../types";
 
-const LazyHome = lazy(() => import('./Home'));
+const LazyHome = lazy(() => import("./Home"));
 
-const Home = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const Home = (
+  props: JSX.IntrinsicAttributes & { children?: React.ReactNode } & {
+    setLoadedGameData: Dispatch<SetStateAction<GameDataType | null>>;
+  }
+) => (
   <Suspense fallback={null}>
     <LazyHome {...props} />
   </Suspense>

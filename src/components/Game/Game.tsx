@@ -23,12 +23,15 @@ import ResultsModal from "./ResultsModal/Results-modal";
 
 const { Panel } = Collapse;
 
-interface GameProps {}
+interface GameProps {
+  loadedGameData: GameDataType;
+}
 
-const Game: FC<GameProps> = () => {
+const Game: FC<GameProps> = (props) => {
+  const { loadedGameData } = props;
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
   const [gameData, setGameData] = useState<GameDataType>({
-    ...INITIAL_GAME_DATA,
+    ...(loadedGameData ?? INITIAL_GAME_DATA),
   });
   const [showResults, setShowResults] = useState(false);
 
