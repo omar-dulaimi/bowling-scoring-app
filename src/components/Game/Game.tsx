@@ -10,7 +10,7 @@ import {
   Form,
   Button,
 } from "antd";
-import { createArrayFromRange } from "../../utils";
+import { createArrayFromRange, scrollToFrame } from "../../utils";
 import { FrameType, GameDataType, ThrowType } from "../../types";
 import { INITIAL_GAME_DATA } from "../../constants/initial-game-state";
 import "./Game.css";
@@ -67,6 +67,9 @@ const Game: FC<GameProps> = (props) => {
       }
       newFrameIndex = i;
       break;
+    }
+    if (newFrameIndex > -1 && newFrameIndex < 10) {
+      scrollToFrame(`frame-${currentFrameIndex + 1}`);
     }
     setCurrentFrameIndex(newFrameIndex);
     if (checkIfGameIsComplete(newFrameIndex, gameData)) {
@@ -216,6 +219,7 @@ const Game: FC<GameProps> = (props) => {
                   }}
                 >
                   <Card
+                    id={`frame-${index + 1}`}
                     style={{
                       width: "300px",
                       marginTop: 12,
