@@ -12,6 +12,7 @@ export type FrameType = {
 
 export type GameDataType = {
   frames: FrameType[];
+  totalGameScore: number;
 };
 
 export type ThrowType = "1st" | "2nd" | "3rd";

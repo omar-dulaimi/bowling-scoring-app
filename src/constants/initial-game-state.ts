@@ -111,4 +111,5 @@ export const INITIAL_GAME_DATA = {
       canHaveThirdThrow: true,
     },
   ],
+  totalGameScore: 0,
 };
