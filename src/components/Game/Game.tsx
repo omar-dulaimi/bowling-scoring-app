@@ -30,7 +30,7 @@ const Game: FC<GameProps> = () => {
   const [gameData, setGameData] = useState<GameDataType>({
     ...INITIAL_GAME_DATA,
   });
-  const [showResults, setShowResults] = useState(true);
+  const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
     let totalGameScore = 0;
